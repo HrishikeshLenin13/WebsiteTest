@@ -16,4 +16,6 @@ Open http://localhost:8000. The page runs entirely locally; there is no account 
 node --test tests/*.test.mjs
 ```
 
+Color choices are saved in this browser. **Reset colors** clears that saved choice. The workbench also works when browser storage is blocked.
+
 The thresholds describe color contrast only, not whole-page accessibility conformance.

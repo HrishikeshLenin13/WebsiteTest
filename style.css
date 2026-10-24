@@ -13,3 +13,5 @@ input[type=color] { width: 4rem; height: 3rem; padding: .2rem; cursor: pointer; 
 output { display: block; margin-top: 1.5rem; font: 700 1.15rem/1.6 system-ui, sans-serif; }
 .note { font-size: .9rem; }
 @media (max-width: 520px) { main { margin: 2rem auto; } #sample { padding: 1rem; } }
+button { padding: .65rem 1rem; border: 1px solid #193c47; border-radius: .25rem; background: transparent; color: inherit; font: 1rem system-ui, sans-serif; cursor: pointer; }
+button:hover { background: #d7e6df; }
