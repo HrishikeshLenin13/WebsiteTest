@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WebsiteTest · Color workbench</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header><p>WebsiteTest</p><h1>Find a readable pair.</h1><p>A small workbench for checking text and background colors before they reach a website.</p></header>
+    <section aria-label="Color controls" class="controls">
+      <label>Text color <input id="foreground" type="color" value="#193c47"></label>
+      <label>Background <input id="background" type="color" value="#f2f7f5"></label>
+    </section>
+    <section id="sample" aria-label="Color preview">
+      <h2>Good ideas deserve clear text.</h2>
+      <p>This paragraph previews your selected colors at a regular reading size. Try a few pairs and compare the result below.</p>
+    </section>
+    <output id="result" aria-live="polite"></output>
+    <p class="note">This checks contrast only. It does not establish that a page meets every accessibility requirement. Normal text uses 4.5:1 and large text uses 3:1 as reference thresholds.</p>
+  </main>
+  <script type="module" src="app.mjs"></script>
+</body>
+</html>
