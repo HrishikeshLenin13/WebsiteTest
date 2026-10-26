@@ -115,3 +115,7 @@ assert.deepEqual(hash.parseColorHash('#fg=%23000&bg=%23fff&secret=omit'),{foregr
 test("shared-links-normalize-reversed-parameter-order", () => {
 assert.deepEqual(hash.parseColorHash('#bg=%23fff&fg=%23000'),{foreground:'#000000',background:'#ffffff'});
 });
+
+test("overlong-fragments-are-ignored", () => {
+assert.equal(hash.parseColorHash('#'+ 'x'.repeat(513)),null);
+});
