@@ -1,12 +1,13 @@
 import { contrastRatio, contrastLabel, contrastChecks } from './contrast.mjs';
 import { loadColors, saveColors, resetColors, swapColors } from './preferences.mjs';
+import { colorHash, parseColorHash } from './color-hash.mjs';
 let storage;
 try { storage = window.localStorage; } catch { /* Persistence is optional. */ }
 const foreground = document.querySelector('#foreground');
 const background = document.querySelector('#background');
 const sample = document.querySelector('#sample');
 const result = document.querySelector('#result');
-const initial = loadColors(storage);
+const initial = parseColorHash(location.hash) ?? loadColors(storage);
 foreground.value = initial.foreground;
 background.value = initial.background;
 function render() {
@@ -18,16 +19,21 @@ function render() {
 }
 function update() {
   render();
+  if (parseColorHash(location.hash)) history.replaceState(null, "", colorHash({foreground:foreground.value,background:background.value}));
   saveColors(storage, { foreground: foreground.value, background: background.value });
 }
 foreground.addEventListener('input', update);
 background.addEventListener('input', update);
+document.querySelector('#share').addEventListener('click', () => {
+  history.replaceState(null, '', colorHash({foreground:foreground.value,background:background.value}));
+});
 document.querySelector('#swap').addEventListener('click', () => {
   const next = swapColors({ foreground: foreground.value, background: background.value });
   foreground.value = next.foreground; background.value = next.background; update();
 });
 document.querySelector('#reset').addEventListener('click', () => {
   const defaults = resetColors(storage);
+  history.replaceState(null, "", location.pathname + location.search);
   foreground.value = defaults.foreground;
   background.value = defaults.background;
   render();
