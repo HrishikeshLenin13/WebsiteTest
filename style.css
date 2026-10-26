@@ -15,3 +15,5 @@ output { display: block; margin-top: 1.5rem; font: 700 1.15rem/1.6 system-ui, sa
 @media (max-width: 520px) { main { margin: 2rem auto; } #sample { padding: 1rem; } }
 button { padding: .65rem 1rem; border: 1px solid #193c47; border-radius: .25rem; background: transparent; color: inherit; font: 1rem system-ui, sans-serif; cursor: pointer; }
 button:hover { background: #d7e6df; }
+
+select { max-width: 100%; padding: .5rem; font: inherit; color: inherit; background: #f2f7f5; }

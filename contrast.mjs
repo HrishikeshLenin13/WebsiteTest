@@ -33,3 +33,9 @@ export function contrastChecks(foreground, background) {
 export function readableForeground(background) {
   return contrastRatio('#000000',background) >= contrastRatio('#ffffff',background) ? '#000000' : '#ffffff';
 }
+
+export const CONTRAST_TARGETS = Object.freeze({normalAA:4.5,largeAA:3,normalAAA:7,largeAAA:4.5});
+export function meetsContrastTarget(foreground, background, target='normalAA') {
+  if (!Object.hasOwn(CONTRAST_TARGETS,target)) throw new TypeError('Unknown contrast target.');
+  return contrastRatio(foreground,background) >= CONTRAST_TARGETS[target];
+}

@@ -1,4 +1,4 @@
-import { contrastRatio, contrastLabel, contrastChecks, readableForeground } from './contrast.mjs';
+import { contrastRatio, contrastLabel, contrastChecks, readableForeground, meetsContrastTarget } from './contrast.mjs';
 import { loadColors, saveColors, resetColors, swapColors } from './preferences.mjs';
 import { colorHash, parseColorHash } from './color-hash.mjs';
 let storage;
@@ -7,6 +7,7 @@ const foreground = document.querySelector('#foreground');
 const background = document.querySelector('#background');
 const sample = document.querySelector('#sample');
 const result = document.querySelector('#result');
+const target = document.querySelector('#target');
 const initial = parseColorHash(location.hash) ?? loadColors(storage);
 foreground.value = initial.foreground;
 background.value = initial.background;
@@ -15,7 +16,7 @@ function render() {
   sample.style.color = foreground.value;
   sample.style.backgroundColor = background.value;
   const checks = contrastChecks(foreground.value, background.value);
-  result.textContent = `${ratio.toFixed(2)}:1 — ${contrastLabel(ratio)}. AAA normal text: ${checks.normalAAA ? "pass" : "below threshold"}.`;
+  result.textContent = `${ratio.toFixed(2)}:1 — ${contrastLabel(ratio)}. AAA normal text: ${checks.normalAAA ? "pass" : "below threshold"}. Selected ${target.selectedOptions[0].text}: ${meetsContrastTarget(foreground.value,background.value,target.value) ? "pass" : "below threshold"}.`;
 }
 function update() {
   render();
@@ -52,3 +53,4 @@ window.addEventListener('hashchange', () => {
 });
 
 document.querySelector('#suggest').addEventListener('click', () => { foreground.value = readableForeground(background.value); update(); });
+target.addEventListener('change', render);
