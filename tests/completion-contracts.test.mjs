@@ -155,3 +155,7 @@ let calls=0;assert.equal(prefs.saveColors({setItem(){calls++}},{foreground:'red'
 test("blocked-save-reports-failure-without-throwing", () => {
 assert.equal(prefs.saveColors({setItem(){throw Error('blocked')}},prefs.DEFAULT_COLORS),false);
 });
+
+test("saved-pairs-use-the-versioned-application-key", () => {
+let key;assert.equal(prefs.saveColors({setItem(k){key=k}},prefs.DEFAULT_COLORS),true);assert.equal(key,'website-test.colors.v1');
+});
