@@ -147,3 +147,7 @@ assert.deepEqual(prefs.loadColors({getItem:()=>JSON.stringify({foreground:'#0000
 test("valid-saved-colors-are-returned-without-extra-fields", () => {
 assert.deepEqual(prefs.loadColors({getItem:()=>JSON.stringify({...prefs.DEFAULT_COLORS,secret:'omit'})}),prefs.DEFAULT_COLORS);
 });
+
+test("invalid-save-does-not-touch-storage", () => {
+let calls=0;assert.equal(prefs.saveColors({setItem(){calls++}},{foreground:'red',background:'#ffffff'}),false);assert.equal(calls,0);
+});
