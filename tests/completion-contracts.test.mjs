@@ -151,3 +151,7 @@ assert.deepEqual(prefs.loadColors({getItem:()=>JSON.stringify({...prefs.DEFAULT_
 test("invalid-save-does-not-touch-storage", () => {
 let calls=0;assert.equal(prefs.saveColors({setItem(){calls++}},{foreground:'red',background:'#ffffff'}),false);assert.equal(calls,0);
 });
+
+test("blocked-save-reports-failure-without-throwing", () => {
+assert.equal(prefs.saveColors({setItem(){throw Error('blocked')}},prefs.DEFAULT_COLORS),false);
+});
