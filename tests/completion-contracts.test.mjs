@@ -51,3 +51,7 @@ const c=api.contrastChecks('#888','#fff');assert.equal(c.normalAA,false);assert.
 test("normal-aaa-and-large-aaa-can-disagree", () => {
 const c=api.contrastChecks('#666','#fff');assert.equal(c.normalAAA,false);assert.equal(c.largeAAA,true);
 });
+
+test("aaa-implies-the-corresponding-aa-check", () => {
+for(let i=0;i<255;i++){const c=api.contrastChecks('#'+i.toString(16).padStart(2,'0').repeat(3),'#fff');if(c.normalAAA)assert.ok(c.normalAA);if(c.largeAAA)assert.ok(c.largeAA);}
+});
