@@ -19,3 +19,7 @@ node --test tests/*.test.mjs
 Color choices are saved in this browser. **Reset colors** clears that saved choice. The workbench also works when browser storage is blocked.
 
 The thresholds describe color contrast only, not whole-page accessibility conformance.
+
+## What the workbench checks
+
+Black text on white measures `21:1`; identical colors measure `1:1`. Threshold labels use the full calculated ratio, not the rounded display number. The test suite covers these reference cases, threshold boundaries, invalid colors, and optional browser-storage behavior.
