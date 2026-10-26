@@ -99,3 +99,7 @@ assert.equal(hash.parseColorHash(''),null);assert.equal(hash.parseColorHash('#')
 test("partial-fragments-are-not-valid-pairs", () => {
 assert.equal(hash.parseColorHash('#fg=%23000'),null);assert.equal(hash.parseColorHash('#bg=%23fff'),null);
 });
+
+test("duplicate-background-fragments-are-ambiguous", () => {
+assert.equal(hash.parseColorHash('#fg=%23000&bg=%23fff&bg=%23000'),null);
+});
