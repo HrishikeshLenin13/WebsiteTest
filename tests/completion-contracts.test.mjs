@@ -15,3 +15,7 @@ assert.ok(api.luminance('#00ff00')>api.luminance('#ff0000'));assert.ok(api.lumin
 test("shorthand-expands-each-channel-independently", () => {
 assert.equal(api.normalizeHex('#a0F'),'#aa00ff');assert.equal(api.normalizeHex('#000'),'#000000');
 });
+
+test("normalization-trims-only-outside-the-color", () => {
+assert.equal(api.normalizeHex('  #Ab12EF  '),'#ab12ef');assert.throws(()=>api.normalizeHex('#ab 12ef'));
+});
