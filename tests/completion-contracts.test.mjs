@@ -75,3 +75,7 @@ assert.ok(api.contrastChecks(api.readableForeground('#888'),'#888').normalAA);as
 test("css-preview-normalizes-uppercase-and-shorthand", () => {
 assert.equal(api.colorCss({foreground:'#ABC',background:'#DEF'}),'color: #aabbcc;\nbackground-color: #ddeeff;');
 });
+
+test("css-preview-rejects-declaration-injection", () => {
+assert.throws(()=>api.colorCss({foreground:'#fff;display:none',background:'#000'}));
+});
