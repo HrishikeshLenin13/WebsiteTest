@@ -35,3 +35,7 @@ for(const value of [0,null,{},undefined])assert.throws(()=>api.normalizeHex(valu
 test("neutral-ramp-luminance-is-monotone", () => {
 let last=-1;for(let i=0;i<256;i++){const hex='#'+i.toString(16).padStart(2,'0').repeat(3);const value=api.luminance(hex);assert.ok(value>last);last=value;}
 });
+
+test("contrast-is-symmetric-for-nonneutral-channels", () => {
+for(const a of ['#123456','#facade','#abcdef'])assert.equal(api.contrastRatio(a,'#987654'),api.contrastRatio('#987654',a));
+});
