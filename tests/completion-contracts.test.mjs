@@ -27,3 +27,7 @@ for(const value of ['#1234','#12345678'])assert.throws(()=>api.normalizeHex(valu
 test("css-function-inputs-do-not-enter-hex-math", () => {
 for(const value of ['rgb(0 0 0)','hsl(0 0% 0%)'])assert.throws(()=>api.normalizeHex(value));
 });
+
+test("non-string-color-values-are-rejected", () => {
+for(const value of [0,null,{},undefined])assert.throws(()=>api.normalizeHex(value));
+});
