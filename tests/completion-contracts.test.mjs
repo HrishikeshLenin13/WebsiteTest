@@ -79,3 +79,7 @@ assert.equal(api.colorCss({foreground:'#ABC',background:'#DEF'}),'color: #aabbcc
 test("css-preview-rejects-declaration-injection", () => {
 assert.throws(()=>api.colorCss({foreground:'#fff;display:none',background:'#000'}));
 });
+
+test("report-json-round-trip-keeps-booleans-and-numbers", () => {
+const r=api.contrastReport({foreground:'#000',background:'#fff'});assert.deepEqual(JSON.parse(JSON.stringify(r)),r);assert.equal(typeof r.checks.ratio,'number');
+});
