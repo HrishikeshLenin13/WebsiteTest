@@ -111,3 +111,7 @@ assert.equal(hash.parseColorHash('#fg=%23000&fg=%23fff&bg=%23fff'),null);
 test("unknown-fragment-fields-do-not-leak-into-colors", () => {
 assert.deepEqual(hash.parseColorHash('#fg=%23000&bg=%23fff&secret=omit'),{foreground:'#000000',background:'#ffffff'});
 });
+
+test("shared-links-normalize-reversed-parameter-order", () => {
+assert.deepEqual(hash.parseColorHash('#bg=%23fff&fg=%23000'),{foreground:'#000000',background:'#ffffff'});
+});
