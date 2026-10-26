@@ -87,3 +87,7 @@ const r=api.contrastReport({foreground:'#000',background:'#fff'});assert.deepEqu
 test("report-fields-are-detached-from-input-object", () => {
 const c={foreground:'#000',background:'#fff'};const r=api.contrastReport(c);c.foreground='#fff';assert.equal(r.foreground,'#000000');
 });
+
+test("report-excludes-unrelated-preference-properties", () => {
+const r=api.contrastReport({foreground:'#000',background:'#fff',token:'omit'});assert.ok(!JSON.stringify(r).includes('omit'));
+});
