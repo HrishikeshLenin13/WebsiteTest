@@ -6,7 +6,7 @@ export function parseColorHash(hash) {
   if (typeof hash !== 'string' || hash.length > 512) return null;
   try {
     const values = new URLSearchParams(hash.replace(/^#/, ''));
-    if (!values.has('fg') || !values.has('bg')) return null;
+    if (values.getAll('fg').length !== 1 || values.getAll('bg').length !== 1) return null;
     return {foreground:normalizeHex(values.get('fg')),background:normalizeHex(values.get('bg'))};
   } catch { return null; }
 }

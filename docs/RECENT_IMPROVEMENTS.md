@@ -39,3 +39,7 @@ Run from the repository root:
 node --test tests/*.test.mjs
 ```
 
+
+## Contrast assistance and exports
+
+The workbench can suggest black/white text, choose normal/large AA or AAA targets, download allowlisted JSON, and preview/copy canonical CSS declarations. Suggestions maximize neutral-text contrast, but do not guarantee AAA for every background. Clipboard failures leave a selectable preview and status message. Shared links reject duplicate fg/bg fields rather than choosing an ambiguous value.
