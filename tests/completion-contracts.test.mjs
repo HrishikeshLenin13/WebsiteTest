@@ -167,3 +167,7 @@ const keys=[];prefs.resetColors({removeItem:k=>keys.push(k)});assert.deepEqual(k
 test("blocked-reset-still-returns-default-colors", () => {
 assert.deepEqual(prefs.resetColors({removeItem(){throw Error('blocked')}}),prefs.DEFAULT_COLORS);
 });
+
+test("reset-results-do-not-alias-global-defaults", () => {
+const c=prefs.resetColors(undefined);c.foreground='#000000';assert.notEqual(c.foreground,prefs.DEFAULT_COLORS.foreground);
+});
