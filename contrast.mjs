@@ -44,3 +44,7 @@ export function contrastReport(colors, target='normalAA') {
   const foreground=normalizeHex(colors.foreground), background=normalizeHex(colors.background);
   return {schemaVersion:1,foreground,background,target,passes:meetsContrastTarget(foreground,background,target),checks:contrastChecks(foreground,background)};
 }
+
+export function colorCss(colors) {
+  return `color: ${normalizeHex(colors.foreground)};\nbackground-color: ${normalizeHex(colors.background)};`;
+}

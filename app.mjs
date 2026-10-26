@@ -1,4 +1,4 @@
-import { contrastRatio, contrastLabel, contrastChecks, readableForeground, meetsContrastTarget, contrastReport } from './contrast.mjs';
+import { contrastRatio, contrastLabel, contrastChecks, readableForeground, meetsContrastTarget, contrastReport, colorCss } from './contrast.mjs';
 import { loadColors, saveColors, resetColors, swapColors } from './preferences.mjs';
 import { colorHash, parseColorHash } from './color-hash.mjs';
 let storage;
@@ -16,6 +16,7 @@ function render() {
   sample.style.color = foreground.value;
   sample.style.backgroundColor = background.value;
   const checks = contrastChecks(foreground.value, background.value);
+  document.querySelector("#css-preview").textContent = colorCss({foreground:foreground.value,background:background.value});
   result.textContent = `${ratio.toFixed(2)}:1 — ${contrastLabel(ratio)}. AAA normal text: ${checks.normalAAA ? "pass" : "below threshold"}. Selected ${target.selectedOptions[0].text}: ${meetsContrastTarget(foreground.value,background.value,target.value) ? "pass" : "below threshold"}.`;
 }
 function update() {
@@ -60,4 +61,10 @@ document.querySelector('#download').addEventListener('click', () => {
   const url=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)+'\n'],{type:'application/json'}));
   const link=document.createElement('a');link.href=url;link.download='contrast-report.json';document.body.append(link);link.click();link.remove();
   setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+
+document.querySelector('#copy-css').addEventListener('click', async () => {
+  const status=document.querySelector('#copy-status');
+  try { await navigator.clipboard.writeText(colorCss({foreground:foreground.value,background:background.value})); status.textContent='CSS copied.'; }
+  catch { status.textContent='Copy was unavailable. Select the CSS preview to copy it manually.'; }
 });

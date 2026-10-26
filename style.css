@@ -17,3 +17,5 @@ button { padding: .65rem 1rem; border: 1px solid #193c47; border-radius: .25rem;
 button:hover { background: #d7e6df; }
 
 select { max-width: 100%; padding: .5rem; font: inherit; color: inherit; background: #f2f7f5; }
+
+#css-preview { max-width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; padding: 1rem; background: #f2f7f5; font-size: 1rem; }
