@@ -123,3 +123,7 @@ assert.equal(hash.parseColorHash('#'+ 'x'.repeat(513)),null);
 test("bad-percent-escapes-never-throw-from-url-parsing", () => {
 assert.doesNotThrow(()=>hash.parseColorHash('#fg=%ZZ&bg=%23fff'));assert.equal(hash.parseColorHash('#fg=%ZZ&bg=%23fff'),null);
 });
+
+test("shared-link-round-trip-preserves-saturated-channels", () => {
+const c={foreground:'#ff0088',background:'#00ff11'};assert.deepEqual(hash.parseColorHash(hash.colorHash(c)),c);
+});
