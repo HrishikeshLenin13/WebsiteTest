@@ -103,3 +103,7 @@ assert.equal(hash.parseColorHash('#fg=%23000'),null);assert.equal(hash.parseColo
 test("duplicate-background-fragments-are-ambiguous", () => {
 assert.equal(hash.parseColorHash('#fg=%23000&bg=%23fff&bg=%23000'),null);
 });
+
+test("duplicate-foreground-fragments-are-ambiguous", () => {
+assert.equal(hash.parseColorHash('#fg=%23000&fg=%23fff&bg=%23fff'),null);
+});
