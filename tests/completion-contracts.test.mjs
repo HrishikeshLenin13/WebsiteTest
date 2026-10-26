@@ -31,3 +31,7 @@ for(const value of ['rgb(0 0 0)','hsl(0 0% 0%)'])assert.throws(()=>api.normalize
 test("non-string-color-values-are-rejected", () => {
 for(const value of [0,null,{},undefined])assert.throws(()=>api.normalizeHex(value));
 });
+
+test("neutral-ramp-luminance-is-monotone", () => {
+let last=-1;for(let i=0;i<256;i++){const hex='#'+i.toString(16).padStart(2,'0').repeat(3);const value=api.luminance(hex);assert.ok(value>last);last=value;}
+});
