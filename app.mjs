@@ -1,5 +1,5 @@
 import { contrastRatio, contrastLabel, contrastChecks } from './contrast.mjs';
-import { loadColors, saveColors, resetColors } from './preferences.mjs';
+import { loadColors, saveColors, resetColors, swapColors } from './preferences.mjs';
 let storage;
 try { storage = window.localStorage; } catch { /* Persistence is optional. */ }
 const foreground = document.querySelector('#foreground');
@@ -22,6 +22,10 @@ function update() {
 }
 foreground.addEventListener('input', update);
 background.addEventListener('input', update);
+document.querySelector('#swap').addEventListener('click', () => {
+  const next = swapColors({ foreground: foreground.value, background: background.value });
+  foreground.value = next.foreground; background.value = next.background; update();
+});
 document.querySelector('#reset').addEventListener('click', () => {
   const defaults = resetColors(storage);
   foreground.value = defaults.foreground;

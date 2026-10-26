@@ -18,3 +18,8 @@ export function resetColors(storage) {
   try { storage.removeItem(KEY); } catch { /* Storage is optional. */ }
   return { ...DEFAULT_COLORS };
 }
+
+export function swapColors(colors) {
+  if (!colors || !valid(colors.foreground) || !valid(colors.background)) throw new TypeError('Use two six-digit colors.');
+  return { foreground: colors.background, background: colors.foreground };
+}
