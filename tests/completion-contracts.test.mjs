@@ -63,3 +63,7 @@ for(const name of ['constructor','__proto__','missing'])assert.throws(()=>api.me
 test("selected-target-does-not-change-measured-ratio", () => {
 const colors={foreground:'#456789',background:'#fff'};assert.equal(api.contrastReport(colors,'normalAA').checks.ratio,api.contrastReport(colors,'normalAAA').checks.ratio);
 });
+
+test("neutral-suggestion-switches-for-dark-backgrounds", () => {
+assert.equal(api.readableForeground('#111'),'#ffffff');assert.equal(api.readableForeground('#eee'),'#000000');
+});
