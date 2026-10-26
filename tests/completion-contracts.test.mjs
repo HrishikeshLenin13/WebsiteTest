@@ -127,3 +127,7 @@ assert.doesNotThrow(()=>hash.parseColorHash('#fg=%ZZ&bg=%23fff'));assert.equal(h
 test("shared-link-round-trip-preserves-saturated-channels", () => {
 const c={foreground:'#ff0088',background:'#00ff11'};assert.deepEqual(hash.parseColorHash(hash.colorHash(c)),c);
 });
+
+test("absent-storage-falls-back-to-fresh-defaults", () => {
+const a=prefs.loadColors(undefined),b=prefs.loadColors(undefined);a.foreground='#000000';assert.notDeepEqual(a,b);
+});
