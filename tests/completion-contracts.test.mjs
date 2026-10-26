@@ -43,3 +43,7 @@ for(const a of ['#123456','#facade','#abcdef'])assert.equal(api.contrastRatio(a,
 test("equal-colors-have-unit-contrast", () => {
 for(const color of ['#123','#09f','#aabbcc'])assert.equal(api.contrastRatio(color,color),1);
 });
+
+test("normal-aa-and-large-aa-can-disagree", () => {
+const c=api.contrastChecks('#888','#fff');assert.equal(c.normalAA,false);assert.equal(c.largeAA,true);
+});
