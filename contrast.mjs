@@ -22,3 +22,9 @@ export function contrastRatio(foreground, background) {
 export function contrastLabel(ratio) {
   return ratio >= 4.5 ? 'Meets the normal-text contrast threshold' : ratio >= 3 ? 'Large text only' : 'Below the text contrast thresholds';
 }
+
+/** Independent AA/AAA decisions use the full, unrounded contrast ratio. */
+export function contrastChecks(foreground, background) {
+  const ratio = contrastRatio(foreground, background);
+  return { ratio, normalAA: ratio >= 4.5, largeAA: ratio >= 3, normalAAA: ratio >= 7, largeAAA: ratio >= 4.5 };
+}

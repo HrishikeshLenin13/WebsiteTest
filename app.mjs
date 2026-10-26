@@ -1,4 +1,4 @@
-import { contrastRatio, contrastLabel } from './contrast.mjs';
+import { contrastRatio, contrastLabel, contrastChecks } from './contrast.mjs';
 import { loadColors, saveColors, resetColors } from './preferences.mjs';
 let storage;
 try { storage = window.localStorage; } catch { /* Persistence is optional. */ }
@@ -13,7 +13,8 @@ function render() {
   const ratio = contrastRatio(foreground.value, background.value);
   sample.style.color = foreground.value;
   sample.style.backgroundColor = background.value;
-  result.textContent = `${ratio.toFixed(2)}:1 — ${contrastLabel(ratio)}`;
+  const checks = contrastChecks(foreground.value, background.value);
+  result.textContent = `${ratio.toFixed(2)}:1 — ${contrastLabel(ratio)}. AAA normal text: ${checks.normalAAA ? "pass" : "below threshold"}.`;
 }
 function update() {
   render();
