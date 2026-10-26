@@ -55,3 +55,7 @@ const c=api.contrastChecks('#666','#fff');assert.equal(c.normalAAA,false);assert
 test("aaa-implies-the-corresponding-aa-check", () => {
 for(let i=0;i<255;i++){const c=api.contrastChecks('#'+i.toString(16).padStart(2,'0').repeat(3),'#fff');if(c.normalAAA)assert.ok(c.normalAA);if(c.largeAAA)assert.ok(c.largeAA);}
 });
+
+test("target-names-do-not-traverse-object-prototypes", () => {
+for(const name of ['constructor','__proto__','missing'])assert.throws(()=>api.meetsContrastTarget('#000','#fff',name));
+});
