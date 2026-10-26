@@ -19,3 +19,7 @@ assert.equal(api.normalizeHex('#a0F'),'#aa00ff');assert.equal(api.normalizeHex('
 test("normalization-trims-only-outside-the-color", () => {
 assert.equal(api.normalizeHex('  #Ab12EF  '),'#ab12ef');assert.throws(()=>api.normalizeHex('#ab 12ef'));
 });
+
+test("alpha-shorthand-is-not-an-opaque-color", () => {
+for(const value of ['#1234','#12345678'])assert.throws(()=>api.normalizeHex(value));
+});
