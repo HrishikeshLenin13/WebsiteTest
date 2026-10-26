@@ -39,3 +39,14 @@ document.querySelector('#reset').addEventListener('click', () => {
   render();
 });
 render();
+
+// Fragment-only navigation does not reload this module. Honor shared links on
+// same-document navigation and browser back/forward as well as initial load.
+window.addEventListener('hashchange', () => {
+  const pair = parseColorHash(location.hash);
+  if (!pair) return;
+  foreground.value = pair.foreground;
+  background.value = pair.background;
+  render();
+  saveColors(storage, pair);
+});
