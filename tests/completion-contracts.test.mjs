@@ -39,3 +39,7 @@ let last=-1;for(let i=0;i<256;i++){const hex='#'+i.toString(16).padStart(2,'0').
 test("contrast-is-symmetric-for-nonneutral-channels", () => {
 for(const a of ['#123456','#facade','#abcdef'])assert.equal(api.contrastRatio(a,'#987654'),api.contrastRatio('#987654',a));
 });
+
+test("equal-colors-have-unit-contrast", () => {
+for(const color of ['#123','#09f','#aabbcc'])assert.equal(api.contrastRatio(color,color),1);
+});
