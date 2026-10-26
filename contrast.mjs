@@ -1,6 +1,14 @@
-/** Relative luminance for six-digit sRGB colors. */
+/** Canonical six-digit sRGB; CSS shorthand expands without losing channels. */
+export function normalizeHex(value) {
+  if (typeof value !== 'string') throw new TypeError('Use a hex color.');
+  let hex = value.trim().toLowerCase();
+  if (/^#[0-9a-f]{3}$/.test(hex)) hex = '#' + [...hex.slice(1)].map(c => c + c).join('');
+  if (!/^#[0-9a-f]{6}$/.test(hex)) throw new TypeError('Use three or six hex digits.');
+  return hex;
+}
+/** Relative luminance for an sRGB color. */
 export function luminance(hex) {
-  if (!/^#[0-9a-f]{6}$/i.test(hex)) throw new TypeError('Use a six-digit hex color.');
+  hex = normalizeHex(hex);
   const linear = [1, 3, 5].map(offset => {
     const channel = parseInt(hex.slice(offset, offset + 2), 16) / 255;
     return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
