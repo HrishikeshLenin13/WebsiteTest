@@ -47,3 +47,7 @@ for(const color of ['#123','#09f','#aabbcc'])assert.equal(api.contrastRatio(colo
 test("normal-aa-and-large-aa-can-disagree", () => {
 const c=api.contrastChecks('#888','#fff');assert.equal(c.normalAA,false);assert.equal(c.largeAA,true);
 });
+
+test("normal-aaa-and-large-aaa-can-disagree", () => {
+const c=api.contrastChecks('#666','#fff');assert.equal(c.normalAAA,false);assert.equal(c.largeAAA,true);
+});
