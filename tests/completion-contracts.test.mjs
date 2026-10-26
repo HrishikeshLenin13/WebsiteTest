@@ -143,3 +143,7 @@ assert.deepEqual(prefs.loadColors({getItem:()=>'{'}),prefs.DEFAULT_COLORS);
 test("partial-saved-pairs-fall-back-atomically", () => {
 assert.deepEqual(prefs.loadColors({getItem:()=>JSON.stringify({foreground:'#000000'})}),prefs.DEFAULT_COLORS);
 });
+
+test("valid-saved-colors-are-returned-without-extra-fields", () => {
+assert.deepEqual(prefs.loadColors({getItem:()=>JSON.stringify({...prefs.DEFAULT_COLORS,secret:'omit'})}),prefs.DEFAULT_COLORS);
+});
