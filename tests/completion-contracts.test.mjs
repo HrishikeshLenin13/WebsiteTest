@@ -135,3 +135,7 @@ const a=prefs.loadColors(undefined),b=prefs.loadColors(undefined);a.foreground='
 test("storage-get-errors-do-not-break-default-rendering", () => {
 assert.deepEqual(prefs.loadColors({getItem(){throw Error('blocked')}}),prefs.DEFAULT_COLORS);
 });
+
+test("malformed-json-does-not-propagate-out-of-loading", () => {
+assert.deepEqual(prefs.loadColors({getItem:()=>'{'}),prefs.DEFAULT_COLORS);
+});
