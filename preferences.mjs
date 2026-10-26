@@ -11,8 +11,8 @@ export function loadColors(storage) {
   return { ...DEFAULT_COLORS };
 }
 export function saveColors(storage, colors) {
-  if (!valid(colors.foreground) || !valid(colors.background)) return false;
-  try { storage.setItem(KEY, JSON.stringify(colors)); return true; } catch { return false; }
+  if (!colors || !valid(colors.foreground) || !valid(colors.background)) return false;
+  try { storage.setItem(KEY, JSON.stringify({foreground:colors.foreground, background:colors.background})); return true; } catch { return false; }
 }
 export function resetColors(storage) {
   try { storage.removeItem(KEY); } catch { /* Storage is optional. */ }
