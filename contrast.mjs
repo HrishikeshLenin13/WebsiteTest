@@ -28,3 +28,8 @@ export function contrastChecks(foreground, background) {
   const ratio = contrastRatio(foreground, background);
   return { ratio, normalAA: ratio >= 4.5, largeAA: ratio >= 3, normalAAA: ratio >= 7, largeAAA: ratio >= 4.5 };
 }
+
+/** Pick the higher-contrast neutral foreground, without changing the background. */
+export function readableForeground(background) {
+  return contrastRatio('#000000',background) >= contrastRatio('#ffffff',background) ? '#000000' : '#ffffff';
+}

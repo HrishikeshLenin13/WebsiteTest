@@ -1,4 +1,4 @@
-import { contrastRatio, contrastLabel, contrastChecks } from './contrast.mjs';
+import { contrastRatio, contrastLabel, contrastChecks, readableForeground } from './contrast.mjs';
 import { loadColors, saveColors, resetColors, swapColors } from './preferences.mjs';
 import { colorHash, parseColorHash } from './color-hash.mjs';
 let storage;
@@ -50,3 +50,5 @@ window.addEventListener('hashchange', () => {
   render();
   saveColors(storage, pair);
 });
+
+document.querySelector('#suggest').addEventListener('click', () => { foreground.value = readableForeground(background.value); update(); });
