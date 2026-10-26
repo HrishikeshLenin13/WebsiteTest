@@ -23,3 +23,7 @@ The thresholds describe color contrast only, not whole-page accessibility confor
 ## What the workbench checks
 
 Black text on white measures `21:1`; identical colors measure `1:1`. Threshold labels use the full calculated ratio, not the rounded display number. The test suite covers these reference cases, threshold boundaries, invalid colors, and optional browser-storage behavior.
+
+## Developer resources
+
+- [Feature usage and API contracts](docs/RECENT_IMPROVEMENTS.md)
