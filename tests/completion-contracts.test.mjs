@@ -179,3 +179,7 @@ const c={foreground:'#ABCDEF',background:'#123456'};assert.deepEqual(prefs.swapC
 test("swap-rejects-incomplete-or-nonopaque-pairs", () => {
 for(const value of [null,{foreground:'#fff',background:'#000000'},{foreground:'#ffffff'}])assert.throws(()=>prefs.swapColors(value));
 });
+
+test("contrast-labels-respect-exact-aa-boundaries", () => {
+assert.ok(api.contrastLabel(4.5).startsWith('Meets'));assert.equal(api.contrastLabel(3),'Large text only');assert.ok(api.contrastLabel(2.99).startsWith('Below'));
+});
