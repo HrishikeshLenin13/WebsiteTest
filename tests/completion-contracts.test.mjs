@@ -95,3 +95,7 @@ const r=api.contrastReport({foreground:'#000',background:'#fff',token:'omit'});a
 test("empty-fragments-do-not-override-preferences", () => {
 assert.equal(hash.parseColorHash(''),null);assert.equal(hash.parseColorHash('#'),null);
 });
+
+test("partial-fragments-are-not-valid-pairs", () => {
+assert.equal(hash.parseColorHash('#fg=%23000'),null);assert.equal(hash.parseColorHash('#bg=%23fff'),null);
+});
