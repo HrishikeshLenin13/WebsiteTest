@@ -171,3 +171,7 @@ assert.deepEqual(prefs.resetColors({removeItem(){throw Error('blocked')}}),prefs
 test("reset-results-do-not-alias-global-defaults", () => {
 const c=prefs.resetColors(undefined);c.foreground='#000000';assert.notEqual(c.foreground,prefs.DEFAULT_COLORS.foreground);
 });
+
+test("swap-preserves-uppercase-valid-six-digit-colors", () => {
+const c={foreground:'#ABCDEF',background:'#123456'};assert.deepEqual(prefs.swapColors(c),{foreground:c.background,background:c.foreground});assert.equal(c.foreground,'#ABCDEF');
+});
