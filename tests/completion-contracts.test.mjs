@@ -139,3 +139,7 @@ assert.deepEqual(prefs.loadColors({getItem(){throw Error('blocked')}}),prefs.DEF
 test("malformed-json-does-not-propagate-out-of-loading", () => {
 assert.deepEqual(prefs.loadColors({getItem:()=>'{'}),prefs.DEFAULT_COLORS);
 });
+
+test("partial-saved-pairs-fall-back-atomically", () => {
+assert.deepEqual(prefs.loadColors({getItem:()=>JSON.stringify({foreground:'#000000'})}),prefs.DEFAULT_COLORS);
+});
