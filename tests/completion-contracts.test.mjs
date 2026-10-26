@@ -175,3 +175,7 @@ const c=prefs.resetColors(undefined);c.foreground='#000000';assert.notEqual(c.fo
 test("swap-preserves-uppercase-valid-six-digit-colors", () => {
 const c={foreground:'#ABCDEF',background:'#123456'};assert.deepEqual(prefs.swapColors(c),{foreground:c.background,background:c.foreground});assert.equal(c.foreground,'#ABCDEF');
 });
+
+test("swap-rejects-incomplete-or-nonopaque-pairs", () => {
+for(const value of [null,{foreground:'#fff',background:'#000000'},{foreground:'#ffffff'}])assert.throws(()=>prefs.swapColors(value));
+});
