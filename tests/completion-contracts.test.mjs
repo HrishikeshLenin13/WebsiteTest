@@ -107,3 +107,7 @@ assert.equal(hash.parseColorHash('#fg=%23000&bg=%23fff&bg=%23000'),null);
 test("duplicate-foreground-fragments-are-ambiguous", () => {
 assert.equal(hash.parseColorHash('#fg=%23000&fg=%23fff&bg=%23fff'),null);
 });
+
+test("unknown-fragment-fields-do-not-leak-into-colors", () => {
+assert.deepEqual(hash.parseColorHash('#fg=%23000&bg=%23fff&secret=omit'),{foreground:'#000000',background:'#ffffff'});
+});
