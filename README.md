@@ -27,3 +27,4 @@ Black text on white measures `21:1`; identical colors measure `1:1`. Threshold l
 ## Developer resources
 
 - [Feature usage and API contracts](docs/RECENT_IMPROVEMENTS.md)
+- [Troubleshooting and recovery](docs/TROUBLESHOOTING.md)
