@@ -91,3 +91,7 @@ const c={foreground:'#000',background:'#fff'};const r=api.contrastReport(c);c.fo
 test("report-excludes-unrelated-preference-properties", () => {
 const r=api.contrastReport({foreground:'#000',background:'#fff',token:'omit'});assert.ok(!JSON.stringify(r).includes('omit'));
 });
+
+test("empty-fragments-do-not-override-preferences", () => {
+assert.equal(hash.parseColorHash(''),null);assert.equal(hash.parseColorHash('#'),null);
+});
