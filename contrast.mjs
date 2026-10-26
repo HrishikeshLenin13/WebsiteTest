@@ -39,3 +39,8 @@ export function meetsContrastTarget(foreground, background, target='normalAA') {
   if (!Object.hasOwn(CONTRAST_TARGETS,target)) throw new TypeError('Unknown contrast target.');
   return contrastRatio(foreground,background) >= CONTRAST_TARGETS[target];
 }
+
+export function contrastReport(colors, target='normalAA') {
+  const foreground=normalizeHex(colors.foreground), background=normalizeHex(colors.background);
+  return {schemaVersion:1,foreground,background,target,passes:meetsContrastTarget(foreground,background,target),checks:contrastChecks(foreground,background)};
+}

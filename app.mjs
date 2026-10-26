@@ -1,4 +1,4 @@
-import { contrastRatio, contrastLabel, contrastChecks, readableForeground, meetsContrastTarget } from './contrast.mjs';
+import { contrastRatio, contrastLabel, contrastChecks, readableForeground, meetsContrastTarget, contrastReport } from './contrast.mjs';
 import { loadColors, saveColors, resetColors, swapColors } from './preferences.mjs';
 import { colorHash, parseColorHash } from './color-hash.mjs';
 let storage;
@@ -54,3 +54,10 @@ window.addEventListener('hashchange', () => {
 
 document.querySelector('#suggest').addEventListener('click', () => { foreground.value = readableForeground(background.value); update(); });
 target.addEventListener('change', render);
+
+document.querySelector('#download').addEventListener('click', () => {
+  const report=contrastReport({foreground:foreground.value,background:background.value},target.value);
+  const url=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)+'\n'],{type:'application/json'}));
+  const link=document.createElement('a');link.href=url;link.download='contrast-report.json';document.body.append(link);link.click();link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
