@@ -163,3 +163,7 @@ let key;assert.equal(prefs.saveColors({setItem(k){key=k}},prefs.DEFAULT_COLORS),
 test("reset-removes-only-the-application-key", () => {
 const keys=[];prefs.resetColors({removeItem:k=>keys.push(k)});assert.deepEqual(keys,['website-test.colors.v1']);
 });
+
+test("blocked-reset-still-returns-default-colors", () => {
+assert.deepEqual(prefs.resetColors({removeItem(){throw Error('blocked')}}),prefs.DEFAULT_COLORS);
+});
