@@ -59,3 +59,7 @@ for(let i=0;i<255;i++){const c=api.contrastChecks('#'+i.toString(16).padStart(2,
 test("target-names-do-not-traverse-object-prototypes", () => {
 for(const name of ['constructor','__proto__','missing'])assert.throws(()=>api.meetsContrastTarget('#000','#fff',name));
 });
+
+test("selected-target-does-not-change-measured-ratio", () => {
+const colors={foreground:'#456789',background:'#fff'};assert.equal(api.contrastReport(colors,'normalAA').checks.ratio,api.contrastReport(colors,'normalAAA').checks.ratio);
+});
