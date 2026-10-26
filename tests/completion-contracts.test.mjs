@@ -71,3 +71,7 @@ assert.equal(api.readableForeground('#111'),'#ffffff');assert.equal(api.readable
 test("suggestion-does-not-require-an-aa-capable-original-pair", () => {
 assert.ok(api.contrastChecks(api.readableForeground('#888'),'#888').normalAA);assert.equal(api.contrastChecks('#888','#888').normalAA,false);
 });
+
+test("css-preview-normalizes-uppercase-and-shorthand", () => {
+assert.equal(api.colorCss({foreground:'#ABC',background:'#DEF'}),'color: #aabbcc;\nbackground-color: #ddeeff;');
+});
