@@ -23,3 +23,7 @@ assert.equal(api.normalizeHex('  #Ab12EF  '),'#ab12ef');assert.throws(()=>api.no
 test("alpha-shorthand-is-not-an-opaque-color", () => {
 for(const value of ['#1234','#12345678'])assert.throws(()=>api.normalizeHex(value));
 });
+
+test("css-function-inputs-do-not-enter-hex-math", () => {
+for(const value of ['rgb(0 0 0)','hsl(0 0% 0%)'])assert.throws(()=>api.normalizeHex(value));
+});
