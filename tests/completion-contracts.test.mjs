@@ -83,3 +83,7 @@ assert.throws(()=>api.colorCss({foreground:'#fff;display:none',background:'#000'
 test("report-json-round-trip-keeps-booleans-and-numbers", () => {
 const r=api.contrastReport({foreground:'#000',background:'#fff'});assert.deepEqual(JSON.parse(JSON.stringify(r)),r);assert.equal(typeof r.checks.ratio,'number');
 });
+
+test("report-fields-are-detached-from-input-object", () => {
+const c={foreground:'#000',background:'#fff'};const r=api.contrastReport(c);c.foreground='#fff';assert.equal(r.foreground,'#000000');
+});
