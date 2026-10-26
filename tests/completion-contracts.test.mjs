@@ -67,3 +67,7 @@ const colors={foreground:'#456789',background:'#fff'};assert.equal(api.contrastR
 test("neutral-suggestion-switches-for-dark-backgrounds", () => {
 assert.equal(api.readableForeground('#111'),'#ffffff');assert.equal(api.readableForeground('#eee'),'#000000');
 });
+
+test("suggestion-does-not-require-an-aa-capable-original-pair", () => {
+assert.ok(api.contrastChecks(api.readableForeground('#888'),'#888').normalAA);assert.equal(api.contrastChecks('#888','#888').normalAA,false);
+});
