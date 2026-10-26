@@ -119,3 +119,7 @@ assert.deepEqual(hash.parseColorHash('#bg=%23fff&fg=%23000'),{foreground:'#00000
 test("overlong-fragments-are-ignored", () => {
 assert.equal(hash.parseColorHash('#'+ 'x'.repeat(513)),null);
 });
+
+test("bad-percent-escapes-never-throw-from-url-parsing", () => {
+assert.doesNotThrow(()=>hash.parseColorHash('#fg=%ZZ&bg=%23fff'));assert.equal(hash.parseColorHash('#fg=%ZZ&bg=%23fff'),null);
+});
