@@ -131,3 +131,7 @@ const c={foreground:'#ff0088',background:'#00ff11'};assert.deepEqual(hash.parseC
 test("absent-storage-falls-back-to-fresh-defaults", () => {
 const a=prefs.loadColors(undefined),b=prefs.loadColors(undefined);a.foreground='#000000';assert.notDeepEqual(a,b);
 });
+
+test("storage-get-errors-do-not-break-default-rendering", () => {
+assert.deepEqual(prefs.loadColors({getItem(){throw Error('blocked')}}),prefs.DEFAULT_COLORS);
+});
