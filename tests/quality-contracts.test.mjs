@@ -295,3 +295,7 @@ let wrote=false;const storage={getItem:()=>"{\"foreground\":\"red\",\"background
 test("invalid-storage-record-13", () => {
 let wrote=false;const storage={getItem:()=>"{\"foreground\":42,\"background\":\"#000000\"}",setItem:()=>{wrote=true;}};const first=prefs.loadColors(storage);assert.deepEqual(first,prefs.DEFAULT_COLORS);assert.notEqual(first,prefs.DEFAULT_COLORS);first.foreground='#111111';assert.deepEqual(prefs.loadColors(storage),prefs.DEFAULT_COLORS);assert.equal(wrote,false);
 });
+
+test("invalid-storage-record-14", () => {
+let wrote=false;const storage={getItem:()=>"{\"foreground\":\"#000000\",\"background\":false}",setItem:()=>{wrote=true;}};const first=prefs.loadColors(storage);assert.deepEqual(first,prefs.DEFAULT_COLORS);assert.notEqual(first,prefs.DEFAULT_COLORS);first.foreground='#111111';assert.deepEqual(prefs.loadColors(storage),prefs.DEFAULT_COLORS);assert.equal(wrote,false);
+});
