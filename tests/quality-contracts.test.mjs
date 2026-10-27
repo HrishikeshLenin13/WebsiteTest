@@ -235,3 +235,7 @@ assert.throws(()=>api.normalizeHex("<style>"),TypeError);assert.equal(hash.parse
 test("invalid-color-shape-13", () => {
 assert.throws(()=>api.normalizeHex("#123\n456"),TypeError);assert.equal(hash.parseColorHash('#fg='+encodeURIComponent("#123\n456")+'&bg=%23ffffff'),null);assert.equal(prefs.saveColors({setItem(){throw Error('must not write');}},{foreground:"#123\n456",background:'#ffffff'}),false);
 });
+
+test("invalid-color-shape-14", () => {
+assert.throws(()=>api.normalizeHex("#12 3456"),TypeError);assert.equal(hash.parseColorHash('#fg='+encodeURIComponent("#12 3456")+'&bg=%23ffffff'),null);assert.equal(prefs.saveColors({setItem(){throw Error('must not write');}},{foreground:"#12 3456",background:'#ffffff'}),false);
+});
