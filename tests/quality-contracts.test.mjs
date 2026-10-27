@@ -243,3 +243,7 @@ assert.throws(()=>api.normalizeHex("#12 3456"),TypeError);assert.equal(hash.pars
 test("invalid-color-shape-15", () => {
 assert.throws(()=>api.normalizeHex("##123456"),TypeError);assert.equal(hash.parseColorHash('#fg='+encodeURIComponent("##123456")+'&bg=%23ffffff'),null);assert.equal(prefs.saveColors({setItem(){throw Error('must not write');}},{foreground:"##123456",background:'#ffffff'}),false);
 });
+
+test("invalid-storage-record-1", () => {
+let wrote=false;const storage={getItem:()=>"null",setItem:()=>{wrote=true;}};const first=prefs.loadColors(storage);assert.deepEqual(first,prefs.DEFAULT_COLORS);assert.notEqual(first,prefs.DEFAULT_COLORS);first.foreground='#111111';assert.deepEqual(prefs.loadColors(storage),prefs.DEFAULT_COLORS);assert.equal(wrote,false);
+});
