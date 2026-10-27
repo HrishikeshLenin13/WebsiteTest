@@ -67,3 +67,7 @@ const rgb=[0, 255, 255];const linear=rgb.map(v=>v/255<=.04045?v/255/12.92:((v/25
 test("color-share-roundtrip-000001", () => {
 const pair={foreground:"#000001",background:"#00ffff"};const encoded=hash.colorHash(pair);assert.deepEqual(hash.parseColorHash(encoded),pair);assert.deepEqual(hash.parseColorHash(encoded+'&unrelated=value'),pair);assert.deepEqual(prefs.swapColors(prefs.swapColors(pair)),pair);assert.equal(api.colorCss(pair),"color: #000001;\nbackground-color: #00ffff;");
 });
+
+test("color-share-roundtrip-010000", () => {
+const pair={foreground:"#010000",background:"#ffff00"};const encoded=hash.colorHash(pair);assert.deepEqual(hash.parseColorHash(encoded),pair);assert.deepEqual(hash.parseColorHash(encoded+'&unrelated=value'),pair);assert.deepEqual(prefs.swapColors(prefs.swapColors(pair)),pair);assert.equal(api.colorCss(pair),"color: #010000;\nbackground-color: #ffff00;");
+});
