@@ -187,3 +187,7 @@ const pair={foreground:api.readableForeground("#00ffff"),background:"#00ffff"};f
 test("invalid-color-shape-1", () => {
 assert.throws(()=>api.normalizeHex(""),TypeError);assert.equal(hash.parseColorHash('#fg='+encodeURIComponent("")+'&bg=%23ffffff'),null);assert.equal(prefs.saveColors({setItem(){throw Error('must not write');}},{foreground:"",background:'#ffffff'}),false);
 });
+
+test("invalid-color-shape-2", () => {
+assert.throws(()=>api.normalizeHex("fff"),TypeError);assert.equal(hash.parseColorHash('#fg='+encodeURIComponent("fff")+'&bg=%23ffffff'),null);assert.equal(prefs.saveColors({setItem(){throw Error('must not write');}},{foreground:"fff",background:'#ffffff'}),false);
+});
