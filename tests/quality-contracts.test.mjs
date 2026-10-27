@@ -263,3 +263,7 @@ let wrote=false;const storage={getItem:()=>"42",setItem:()=>{wrote=true;}};const
 test("invalid-storage-record-5", () => {
 let wrote=false;const storage={getItem:()=>"true",setItem:()=>{wrote=true;}};const first=prefs.loadColors(storage);assert.deepEqual(first,prefs.DEFAULT_COLORS);assert.notEqual(first,prefs.DEFAULT_COLORS);first.foreground='#111111';assert.deepEqual(prefs.loadColors(storage),prefs.DEFAULT_COLORS);assert.equal(wrote,false);
 });
+
+test("invalid-storage-record-6", () => {
+let wrote=false;const storage={getItem:()=>"\"x\"",setItem:()=>{wrote=true;}};const first=prefs.loadColors(storage);assert.deepEqual(first,prefs.DEFAULT_COLORS);assert.notEqual(first,prefs.DEFAULT_COLORS);first.foreground='#111111';assert.deepEqual(prefs.loadColors(storage),prefs.DEFAULT_COLORS);assert.equal(wrote,false);
+});
