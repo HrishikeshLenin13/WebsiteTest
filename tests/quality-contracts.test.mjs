@@ -31,3 +31,7 @@ const rgb=[171, 205, 239];const linear=rgb.map(v=>v/255<=.04045?v/255/12.92:((v/
 test("linear-channel-reference-fedcba", () => {
 const rgb=[254, 220, 186];const linear=rgb.map(v=>v/255<=.04045?v/255/12.92:((v/255+.055)/1.055)**2.4);const expected=linear.reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);assert.ok(Math.abs(api.luminance("#fedcba")-expected)<1e-14);assert.equal(api.normalizeHex("#FEDCBA"),"#fedcba");
 });
+
+test("linear-channel-reference-123456", () => {
+const rgb=[18, 52, 86];const linear=rgb.map(v=>v/255<=.04045?v/255/12.92:((v/255+.055)/1.055)**2.4);const expected=linear.reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);assert.ok(Math.abs(api.luminance("#123456")-expected)<1e-14);assert.equal(api.normalizeHex("#123456"),"#123456");
+});
