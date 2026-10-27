@@ -103,3 +103,7 @@ const pair={foreground:"#654321",background:"#fedcba"};const encoded=hash.colorH
 test("color-share-roundtrip-808080", () => {
 const pair={foreground:"#808080",background:"#abcdef"};const encoded=hash.colorHash(pair);assert.deepEqual(hash.parseColorHash(encoded),pair);assert.deepEqual(hash.parseColorHash(encoded+'&unrelated=value'),pair);assert.deepEqual(prefs.swapColors(prefs.swapColors(pair)),pair);assert.equal(api.colorCss(pair),"color: #808080;\nbackground-color: #abcdef;");
 });
+
+test("color-share-roundtrip-ff0000", () => {
+const pair={foreground:"#ff0000",background:"#0b0b0b"};const encoded=hash.colorHash(pair);assert.deepEqual(hash.parseColorHash(encoded),pair);assert.deepEqual(hash.parseColorHash(encoded+'&unrelated=value'),pair);assert.deepEqual(prefs.swapColors(prefs.swapColors(pair)),pair);assert.equal(api.colorCss(pair),"color: #ff0000;\nbackground-color: #0b0b0b;");
+});
