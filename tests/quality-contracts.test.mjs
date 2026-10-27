@@ -63,3 +63,7 @@ const rgb=[255, 255, 0];const linear=rgb.map(v=>v/255<=.04045?v/255/12.92:((v/25
 test("linear-channel-reference-00ffff", () => {
 const rgb=[0, 255, 255];const linear=rgb.map(v=>v/255<=.04045?v/255/12.92:((v/255+.055)/1.055)**2.4);const expected=linear.reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);assert.ok(Math.abs(api.luminance("#00ffff")-expected)<1e-14);assert.equal(api.normalizeHex("#00FFFF"),"#00ffff");
 });
+
+test("color-share-roundtrip-000001", () => {
+const pair={foreground:"#000001",background:"#00ffff"};const encoded=hash.colorHash(pair);assert.deepEqual(hash.parseColorHash(encoded),pair);assert.deepEqual(hash.parseColorHash(encoded+'&unrelated=value'),pair);assert.deepEqual(prefs.swapColors(prefs.swapColors(pair)),pair);assert.equal(api.colorCss(pair),"color: #000001;\nbackground-color: #00ffff;");
+});
