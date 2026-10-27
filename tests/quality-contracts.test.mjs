@@ -123,3 +123,7 @@ const pair={foreground:"#ffff00",background:"#010000"};const encoded=hash.colorH
 test("color-share-roundtrip-00ffff", () => {
 const pair={foreground:"#00ffff",background:"#000001"};const encoded=hash.colorHash(pair);assert.deepEqual(hash.parseColorHash(encoded),pair);assert.deepEqual(hash.parseColorHash(encoded+'&unrelated=value'),pair);assert.deepEqual(prefs.swapColors(prefs.swapColors(pair)),pair);assert.equal(api.colorCss(pair),"color: #00ffff;\nbackground-color: #000001;");
 });
+
+test("contrast-report-invariants-000001", () => {
+const pair={foreground:api.readableForeground("#000001"),background:"#000001"};for(const [target,threshold] of Object.entries(api.CONTRAST_TARGETS)){const report=api.contrastReport(pair,target);assert.equal(report.checks.ratio,api.contrastRatio(pair.background,pair.foreground));assert.equal(report.passes,report.checks.ratio>=threshold);assert.ok(report.checks.ratio>=4.5);assert.equal(report.schemaVersion,1);}
+});
