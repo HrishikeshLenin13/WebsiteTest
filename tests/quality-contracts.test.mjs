@@ -147,3 +147,7 @@ const pair={foreground:api.readableForeground("#0b0b0b"),background:"#0b0b0b"};f
 test("contrast-report-invariants-abcdef", () => {
 const pair={foreground:api.readableForeground("#abcdef"),background:"#abcdef"};for(const [target,threshold] of Object.entries(api.CONTRAST_TARGETS)){const report=api.contrastReport(pair,target);assert.equal(report.checks.ratio,api.contrastRatio(pair.background,pair.foreground));assert.equal(report.passes,report.checks.ratio>=threshold);assert.ok(report.checks.ratio>=4.5);assert.equal(report.schemaVersion,1);}
 });
+
+test("contrast-report-invariants-fedcba", () => {
+const pair={foreground:api.readableForeground("#fedcba"),background:"#fedcba"};for(const [target,threshold] of Object.entries(api.CONTRAST_TARGETS)){const report=api.contrastReport(pair,target);assert.equal(report.checks.ratio,api.contrastRatio(pair.background,pair.foreground));assert.equal(report.passes,report.checks.ratio>=threshold);assert.ok(report.checks.ratio>=4.5);assert.equal(report.schemaVersion,1);}
+});
