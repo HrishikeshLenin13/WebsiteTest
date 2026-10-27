@@ -47,3 +47,7 @@ const rgb=[128, 128, 128];const linear=rgb.map(v=>v/255<=.04045?v/255/12.92:((v/
 test("linear-channel-reference-ff0000", () => {
 const rgb=[255, 0, 0];const linear=rgb.map(v=>v/255<=.04045?v/255/12.92:((v/255+.055)/1.055)**2.4);const expected=linear.reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);assert.ok(Math.abs(api.luminance("#ff0000")-expected)<1e-14);assert.equal(api.normalizeHex("#FF0000"),"#ff0000");
 });
+
+test("linear-channel-reference-00ff00", () => {
+const rgb=[0, 255, 0];const linear=rgb.map(v=>v/255<=.04045?v/255/12.92:((v/255+.055)/1.055)**2.4);const expected=linear.reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);assert.ok(Math.abs(api.luminance("#00ff00")-expected)<1e-14);assert.equal(api.normalizeHex("#00FF00"),"#00ff00");
+});
