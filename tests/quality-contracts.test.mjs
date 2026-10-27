@@ -39,3 +39,7 @@ const rgb=[18, 52, 86];const linear=rgb.map(v=>v/255<=.04045?v/255/12.92:((v/255
 test("linear-channel-reference-654321", () => {
 const rgb=[101, 67, 33];const linear=rgb.map(v=>v/255<=.04045?v/255/12.92:((v/255+.055)/1.055)**2.4);const expected=linear.reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);assert.ok(Math.abs(api.luminance("#654321")-expected)<1e-14);assert.equal(api.normalizeHex("#654321"),"#654321");
 });
+
+test("linear-channel-reference-808080", () => {
+const rgb=[128, 128, 128];const linear=rgb.map(v=>v/255<=.04045?v/255/12.92:((v/255+.055)/1.055)**2.4);const expected=linear.reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);assert.ok(Math.abs(api.luminance("#808080")-expected)<1e-14);assert.equal(api.normalizeHex("#808080"),"#808080");
+});
