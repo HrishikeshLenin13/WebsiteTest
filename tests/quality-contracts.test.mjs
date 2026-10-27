@@ -251,3 +251,7 @@ let wrote=false;const storage={getItem:()=>"null",setItem:()=>{wrote=true;}};con
 test("invalid-storage-record-2", () => {
 let wrote=false;const storage={getItem:()=>"[]",setItem:()=>{wrote=true;}};const first=prefs.loadColors(storage);assert.deepEqual(first,prefs.DEFAULT_COLORS);assert.notEqual(first,prefs.DEFAULT_COLORS);first.foreground='#111111';assert.deepEqual(prefs.loadColors(storage),prefs.DEFAULT_COLORS);assert.equal(wrote,false);
 });
+
+test("invalid-storage-record-3", () => {
+let wrote=false;const storage={getItem:()=>"{}",setItem:()=>{wrote=true;}};const first=prefs.loadColors(storage);assert.deepEqual(first,prefs.DEFAULT_COLORS);assert.notEqual(first,prefs.DEFAULT_COLORS);first.foreground='#111111';assert.deepEqual(prefs.loadColors(storage),prefs.DEFAULT_COLORS);assert.equal(wrote,false);
+});
