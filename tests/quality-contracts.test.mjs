@@ -183,3 +183,7 @@ const pair={foreground:api.readableForeground("#ffff00"),background:"#ffff00"};f
 test("contrast-report-invariants-00ffff", () => {
 const pair={foreground:api.readableForeground("#00ffff"),background:"#00ffff"};for(const [target,threshold] of Object.entries(api.CONTRAST_TARGETS)){const report=api.contrastReport(pair,target);assert.equal(report.checks.ratio,api.contrastRatio(pair.background,pair.foreground));assert.equal(report.passes,report.checks.ratio>=threshold);assert.ok(report.checks.ratio>=4.5);assert.equal(report.schemaVersion,1);}
 });
+
+test("invalid-color-shape-1", () => {
+assert.throws(()=>api.normalizeHex(""),TypeError);assert.equal(hash.parseColorHash('#fg='+encodeURIComponent("")+'&bg=%23ffffff'),null);assert.equal(prefs.saveColors({setItem(){throw Error('must not write');}},{foreground:"",background:'#ffffff'}),false);
+});
